@@ -1,0 +1,40 @@
+#define MOTOR 13
+#define SOLAR_PANEL A0
+#define THRESHOLD
+int ambientlight_th=0;
+
+void setup() {
+  // put your setup code here, to run once:
+  //pinMode(MOTOR, OUTPUT);
+  pinMode(SOLAR_PANEL, INPUT);
+  Serial.begin(9600);
+  //Serial.print(analogRead(SOLAR_PANEL));
+  ambientlight_th=analogRead(SOLAR_PANEL);
+}
+void loop(){
+  int bits[10];
+  int reading=analogRead(SOLAR_PANEL);
+  int threshold=ambientlight_th;
+  if(reading>threshold){
+    delay(20);
+    for(int i=0;i<10;i++){
+      if(reading>threshold){
+        bits[i]=1;
+      }else{
+        bits[i]=0;
+      }
+      delay(20);
+    }
+    int moisture=0;
+    for(int j=0;j<10;j++){
+      moisture=moisture*2+bits[j];
+      Serial.print(bits[j]);
+    }
+    Serial.println(moisture);
+    if(moisture<=750){
+      digitalWrite(MOTOR,LOW);
+    }else{
+      digitalWrite(MOTOR,HIGH);
+    }
+  }
+}
