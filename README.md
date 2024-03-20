@@ -1,1 +1,2 @@
 # LIFI
+The primary goal of the project is to transmit data using light as a source. To begin, I have conducted a small hardware implementation of LiFi technology using Arduino boards and a high beam LED in the Arduino IDE. Data is collected from the soil moisture sensor at the transmitter and then sent to the receiver via the high beam LED. The receiver, equipped with a photodetector board, will read the transmitted data.
